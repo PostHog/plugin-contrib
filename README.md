@@ -28,8 +28,13 @@ function setupPlugin(meta: PluginMeta) {
                 headers: { 'Content-Type': 'application/json' },
             })
             const json = await resp.json()
-        }
+        },
+        
     })
+}
+
+function shutdown(meta: PluginMeta) { // not implemented
+    meta.global.batcher.flush()
 }
 
 export function processEvent(event: PluginEvent, meta: PluginMeta) {
