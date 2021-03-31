@@ -13,6 +13,7 @@
     "compile": "tsc -b",
     "prepublishOnly": "yarn build"
   },
+  "files": ["README.md", "dist", "src", "tsconfig.json"],
   "devDependencies": {
     "@types/node": "^14.14.37",
     "eslint": "^7.18.0",
