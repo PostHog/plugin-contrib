@@ -1,6 +1,6 @@
 {
   "name": "@posthog/plugin-contrib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Contributed utilities for plugin authors",
   "author": "PostHog <hey@posthog.com>",
   "repository": "github:PostHog/plugin-contrib",
@@ -13,7 +13,12 @@
     "compile": "tsc -b",
     "prepublishOnly": "yarn build"
   },
-  "files": ["README.md", "dist", "src", "tsconfig.json"],
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "tsconfig.json"
+  ],
   "devDependencies": {
     "@types/node": "^14.14.37",
     "eslint": "^7.18.0",
