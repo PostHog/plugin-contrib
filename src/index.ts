@@ -1,1 +1,1 @@
-export function bla() {}
+export { createBuffer } from './buffer'
