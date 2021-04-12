@@ -5,40 +5,40 @@
 
 This project contains shared code that PostHog plugin authors can use.
 
+Code imported from this package runs outside the plugin virtual machine, and can thus use timeouts and other NodeJS features.
+
 ## Included in this package
 
 ### Batch processing
 
-NOTE: this is still a stub, the code is not yet there
-
 ```typescript
+import { createBuffer } from '@posthog/plugin-contrib'
 import fetch from 'node-fetch'
-import { PluginEvent, PluginMeta } from '@posthog/plugin-scaffold'
-import { createBatch } from '@posthog/plugin-contrib'
 
-function setupPlugin(meta: PluginMeta) {
-    meta.global.batcher = createBatch({
-        maxCount: 1000, // elements
-        maxDelay: 30, // seconds
-        retryCount: 3,
-        onBatch: async (batch: PluginEvent[]) => {
+export function setupPlugin({ global }) {
+    global.buffer = createBuffer({
+        limit: 10 * 1024 * 1024, // 10 MB
+        timeoutSeconds: 10 * 60, // 10 minutes
+        onFlush: async (batch) => {
             const resp = await fetch('https://httpbin.org/post', {
                 method: 'post',
-                body:    JSON.stringify(batch),
+                body: JSON.stringify(batch),
                 headers: { 'Content-Type': 'application/json' },
             })
             const json = await resp.json()
+            if (!json.success) {
+                // retry somehow?
+            }
         },
-        
     })
 }
 
-function shutdown(meta: PluginMeta) { // not implemented
-    meta.global.batcher.flush()
+export function teardownPlugin({ global }) {
+    global.buffer.flush()
 }
 
-export function processEvent(event: PluginEvent, meta: PluginMeta) {
-    meta.global.batcher.add(event)
+export function processEvent(event, { config, global }) {
+    global.buffer.add(event, JSON.stringify(event).length) // add(object, points)
     return event
 }
 ```
