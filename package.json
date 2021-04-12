@@ -13,8 +13,14 @@
     "compile": "tsc -b",
     "prepublishOnly": "yarn build"
   },
-  "files": ["README.md", "dist", "src", "tsconfig.json"],
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "tsconfig.json"
+  ],
   "devDependencies": {
+    "@posthog/plugin-scaffold": "^0.5.0",
     "@types/node": "^14.14.37",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
