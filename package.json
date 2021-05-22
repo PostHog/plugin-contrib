@@ -1,6 +1,6 @@
 {
   "name": "@posthog/plugin-contrib",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Contributed utilities for plugin authors",
   "author": "PostHog <hey@posthog.com>",
   "repository": "github:PostHog/plugin-contrib",
