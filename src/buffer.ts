@@ -5,6 +5,7 @@ type BufferOptions = {
 }
 
 export function createBuffer(opts: Partial<BufferOptions>) {
+    console.warn('⚠️⚠️⚠️ This plugin is using the deprecated buffer implementation. If it is an official PostHog plugin, please update it to the latest version. If this is a custom plugin please use exportEvents instead. https://posthog.com/docs/apps/build/reference#exportevents ⚠️⚠️⚠️')
     const buffer = {
         _buffer: [] as any[],
         _timeout: null as NodeJS.Timeout | null,
